@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>question 2</title>
+</head>
+
+<body>
+
+    <h1>please check console for answers</h1>
+    <ul>
+        <li data-time="5:17">Flexbox Video</li>
+        <li data-time="8:22">Flexbox Video</li>
+        <li data-time="3:34">Redux Video</li>
+        <li data-time="5:23">Flexbox Video</li>
+        <li data-time="7:12">Flexbox Video</li>
+        <li data-time="7:24">Redux Video</li>
+        <li data-time="6:46">Flexbox Video</li>
+        <li data-time="4:45">Flexbox Video</li>
+        <li data-time="4:40">Flexbox Video</li>
+        <li data-time="7:58">Redux Video</li>
+        <li data-time="11:51">Flexbox Video</li>
+        <li data-time="9:13">Flexbox Video</li>
+        <li data-time="5:50">Flexbox Video</li>
+        <li data-time="5:52">Redux Video</li>
+        <li data-time="5:49">Flexbox Video</li>
+        <li data-time="8:57">Flexbox Video</li>
+        <li data-time="11:29">Flexbox Video</li>
+        <li data-time="3:07">Flexbox Video</li>
+        <li data-time="5:59">Redux Video</li>
+        <li data-time="3:31">Flexbox Video</li>
+    </ul>
+
+    <!-- 1.Select all the list items on the page and convert to array. -->
+    <!-- 2.Filter for only the elements that contain the word 'flexbox' -->
+    <!-- 3.map down to a list of time strings -->
+    <!-- 4.map to an array of seconds -->
+    <!-- 5.reduce to get total using .filter and .map -->
+
+    <script>
+        // 1. Select all the list items on the page and convert to array.
+        console.log("Ques 1.")
+        var array = [];
+        var arr = document.querySelectorAll("li");
+        arr.forEach(ele => array.push(ele));
+        console.log(array);
+
+        // 2.Filter for only the elements that contain the word 'flexbox'
+        console.log("\n Ques 2.");
+        var two = array.filter(ele => {
+            if (ele.innerHTML.split(" ")[0] == "Flexbox")
+                return ele;
+        })
+        console.log(two);
+
+        // 3.map down to a list of time strings
+        console.log("\n Ques 3.")
+        var list = array.map(element => {
+            return element.getAttribute("data-time");
+        });
+        console.log(list);
+
+        // 4.map to an array of seconds
+        console.log("\n Ques 4")
+        var second = array.map(element=>{
+            return parseInt(element.getAttribute("data-time").split(":")[1]);
+        })
+        console.log(second);
+
+
+        // 5.reduce to get total using .filter and .map
+        console.log("\n Ques 5")
+    
+        
+        var sumSecond = list.reduce((accumulator,ele)=>{
+            let sec = parseInt(ele.split(":")[1]);
+            let min = parseInt(ele.split(":")[0])*60;
+            return accumulator+sec+min;
+        },0)
+        console.log("second sum: ", sumSecond);
+
+        var sumHour = Math.round(sumSecond/3600);
+        sumSecond = sumSecond%3600;
+        var sumMinute = Math.round(sumSecond/60);
+        sumSecond = Math.round(sumSecond%60);
+
+        console.log(`Total Time : ${sumHour}:${sumMinute}:${sumSecond}`);
+
+    </script>
+</body>
+
+</html>
